@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="850.3999999999999,2816" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="850.4,2816" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -92,9 +92,6 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Sequence sap:VirtualizedContainerService.HintSize="562.4,2639.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="x:String" Name="choiceTest" />
-      </Sequence.Variables>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -112,19 +109,23 @@
       </ui:InputDialog>
       <ui:InputDialog Options="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="500,295.2" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Options" OptionsString="Customers;Order Details;Orders;Products" Title="Do you want to test Customers, Order Details, Orders or Products">
         <ui:InputDialog.Result>
-          <OutArgument x:TypeArguments="x:String">[choiceTest]</OutArgument>
+          <OutArgument x:TypeArguments="x:String">[GlobalVariablesNamespace.GlobalVariables.choiceTest]</OutArgument>
         </ui:InputDialog.Result>
       </ui:InputDialog>
       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Login.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="500,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Login.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <InArgument x:TypeArguments="x:String" x:Key="loginEmail">[GlobalVariablesNamespace.GlobalVariables.loginEmail]</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="loginPassword">[GlobalVariablesNamespace.GlobalVariables.loginPassword]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="loginEmail">
+            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="GlobalVariablesNamespace.GlobalVariables.loginEmail" />
+          </InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="loginPassword">
+            <VisualBasicValue x:TypeArguments="x:String" ExpressionText="GlobalVariablesNamespace.GlobalVariables.loginPassword" />
+          </InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
       <ui:IfElseIf DisplayName="Else If" sap:VirtualizedContainerService.HintSize="500,1475.2" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
         <ui:IfElseIf.ConditionBlocks>
           <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
-            <ui:IfElseIfBlock BlockType="If" Condition="[choiceTest = &quot;Customers&quot;]">
+            <ui:IfElseIfBlock BlockType="If" Condition="[GlobalVariablesNamespace.GlobalVariables.choiceTest = &quot;Customers&quot;]">
               <ui:IfElseIfBlock.Then>
                 <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
@@ -140,7 +141,7 @@
                 </Sequence>
               </ui:IfElseIfBlock.Then>
             </ui:IfElseIfBlock>
-            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[choiceTest = &quot;Products&quot;]">
+            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[GlobalVariablesNamespace.GlobalVariables.choiceTest = &quot;Products&quot;]">
               <ui:IfElseIfBlock.Then>
                 <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
                   <sap:WorkflowViewStateService.ViewState>
@@ -156,7 +157,7 @@
                 </Sequence>
               </ui:IfElseIfBlock.Then>
             </ui:IfElseIfBlock>
-            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[choiceTest = &quot;Orders&quot;]">
+            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[GlobalVariablesNamespace.GlobalVariables.choiceTest = &quot;Orders&quot;]">
               <ui:IfElseIfBlock.Then>
                 <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
@@ -172,7 +173,7 @@
                 </Sequence>
               </ui:IfElseIfBlock.Then>
             </ui:IfElseIfBlock>
-            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[choiceTest = &quot;Order Details&quot;]">
+            <ui:IfElseIfBlock BlockType="ElseIf" Condition="[GlobalVariablesNamespace.GlobalVariables.choiceTest = &quot;Order Details&quot;]">
               <ui:IfElseIfBlock.Then>
                 <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_8">
                   <sap:WorkflowViewStateService.ViewState>
